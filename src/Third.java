@@ -30,6 +30,7 @@ public class Third {
           options.addArguments("--incognito");
           WebDriver driver = new ChromeDriver(options);
           driver.manage().window().maximize();
+          driver.manage().deleteAllCookies();
           driver.get("https://datasave.biz/sign-up/");
           
 // Keeping the input fields as blank [Signup]         
@@ -138,6 +139,7 @@ public class Third {
            options.addArguments("--incognito");
            WebDriver driver = new ChromeDriver(options);
            driver.manage().window().maximize();
+           driver.manage().deleteAllCookies();
            driver.get("https://www.datasave.biz/login/");
            
 	       driver.findElement(By.id("user_login")).sendKeys("testuser@example.com");
@@ -148,6 +150,7 @@ public class Third {
            driver.findElement(By.id("submit")).click();
            
            driver.get("https://www.datasave.biz/san-shop/");  
+           Thread.sleep(2000);  
            driver.get("https://www.datasave.biz/?product=home-subscription"); 	
  // Find the dropdown element
            WebElement dropdownElement = driver.findElement(By.id("pa_disk-size"));
@@ -162,15 +165,18 @@ public class Third {
            driver.findElement(By.className("checkout-button")).click();
            driver.findElement(By.id("billing_first_name")).sendKeys("User");
            driver.findElement(By.id("billing_last_name")).sendKeys("test");
-//           WebElement dropdownElement1 =  driver.findElement(By.id("billing_country_field"));
-//           Select dropdown1 = new Select(dropdownElement1);
-//           dropdown1.selectByValue("IN");
+           WebElement dropdownElement1 =  driver.findElement(By.id("billing_country_field"));
+           dropdownElement1.clear();
+           Select dropdown1 = new Select(dropdownElement1);
+           dropdown1.selectByValue("IN");
            driver.findElement(By.id("billing_address_1")).sendKeys("qwerty");
            driver.findElement(By.id("billing_address_2")).sendKeys("ty");
            driver.findElement(By.id("billing_city")).sendKeys("Lucknow");
            driver.findElement(By.id("billing_postcode")).sendKeys("226010");
            driver.findElement(By.id("billing_phone")).sendKeys("2134659784");
-         //  driver.findElement(By.id("billing_email")).sendKeys("codingbrains52@gmail.com");
+           WebElement fieldInput = driver.findElement(By.id("billing_email"));
+           fieldInput.clear();
+           fieldInput.sendKeys("codingbrains52@gmail.com");
 //           driver.findElement(By.name("cardnumber")).sendKeys("4242424242424242");
 //           driver.findElement(By.name("exp-date")).sendKeys("0824");
 //           driver.findElement(By.name("cvc")).sendKeys("3333");
