@@ -1,3 +1,5 @@
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -152,6 +154,23 @@ public class Third {
            driver.get("https://www.datasave.biz/san-shop/");  
            Thread.sleep(2000);  
            driver.get("https://www.datasave.biz/?product=home-subscription"); 	
+           
+           // Check if the product is added
+           List<WebElement> addedToCartElements = driver.findElements(By.className("already_added"));
+           if (!addedToCartElements.isEmpty()) {
+               // Navigate to cart
+               driver.get("https://www.datasave.biz/cart/");
+
+               // Wait until cart elements are loaded
+//               WebDriverWait wait = new WebDriverWait(driver, 10);
+//               wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("cart-item")));
+               
+               WebElement removeButton = driver.findElement(By.className("remove")); 
+               removeButton.click();
+           }
+           driver.navigate().refresh();
+           driver.get("https://www.datasave.biz/?product=home-subscription"); 
+
  // Find the dropdown element
            WebElement dropdownElement = driver.findElement(By.id("pa_disk-size"));
 
@@ -163,37 +182,34 @@ public class Third {
 // Find the "Add to Cart" button by its class
            driver.findElement(By.className("single_add_to_cart_button")).click();
            driver.findElement(By.className("checkout-button")).click();
+//           WebElement billingInput = driver.findElement(By.className("customer_details"));
+//           billingInput.clear();
            driver.findElement(By.id("billing_first_name")).sendKeys("User");
            driver.findElement(By.id("billing_last_name")).sendKeys("test");
-           WebElement dropdownElement1 =  driver.findElement(By.id("billing_country_field"));
-           dropdownElement1.clear();
+           WebElement dropdownElement1 =  driver.findElement(By.id("billing_country"));
+//           dropdownElement1.clear();
            Select dropdown1 = new Select(dropdownElement1);
            dropdown1.selectByValue("IN");
            driver.findElement(By.id("billing_address_1")).sendKeys("qwerty");
            driver.findElement(By.id("billing_address_2")).sendKeys("ty");
            driver.findElement(By.id("billing_city")).sendKeys("Lucknow");
            driver.findElement(By.id("billing_postcode")).sendKeys("226010");
-           driver.findElement(By.id("billing_phone")).sendKeys("2134659784");
+           driver.findElement(By.id("billing_phone")).sendKeys("21346597841");
            WebElement fieldInput = driver.findElement(By.id("billing_email"));
-           fieldInput.clear();
+//           fieldInput.clear();
            fieldInput.sendKeys("codingbrains52@gmail.com");
 //           driver.findElement(By.name("cardnumber")).sendKeys("4242424242424242");
 //           driver.findElement(By.name("exp-date")).sendKeys("0824");
 //           driver.findElement(By.name("cvc")).sendKeys("3333");
-           WebElement cardNumberInput = driver.findElement(By.name("cardnumber"));
-           cardNumberInput.clear();
-           cardNumberInput.sendKeys("4242424242424242"); // Replace with valid test data
-
-           // Find the expiration date input and enter a value
-           WebElement expiryInput = driver.findElement(By.name("exp-date"));
-           expiryInput.clear();
-           expiryInput.sendKeys("1225"); // Replace with valid test data
-
-           // Find the CVC input and enter a value
-           WebElement cvcInput = driver.findElement(By.name("cvc"));
-           cvcInput.clear();
-           cvcInput.sendKeys("1234"); // Replace with valid test data
-
+//           WebElement cardNumberInput = driver.findElement(By.name("cardnumber"));
+//           cardNumberInput.clear();
+//           cardNumberInput.sendKeys("4242424242424242"); // Replace with valid test data
+//
+//           // Find the expiration date input and enter a value
+//           WebElement expiryInput = driver.findElement(By.name("exp-date"));
+//           expiryInput.clear();
+//           expiryInput.sendKeys("1225"); // Replace with valid test data
+           
 	}catch(Exception e)    
 		{
 		e.printStackTrace();
